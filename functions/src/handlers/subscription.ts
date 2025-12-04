@@ -1,10 +1,16 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import {Request, Response} from "express";
+import {initializeApp} from "firebase-admin/app";
 // import * as sgMail from "@sendgrid/mail"
 // import * as functions from "firebase-functions"
 
-export const revenueCatWebhookSSV1 = functions.https.onRequest(async (req: Request, res: Response) => {
+// initial Firebase Admin SDK
+if (!admin.apps.length) {
+  initializeApp();
+}
+
+export const revenueCatWebhookSSV2 = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
     // Verify the request source (optional, requires RevenueCat's signature key)
     const auth = req.headers.authorization;
